@@ -51,8 +51,6 @@
 （2） 编辑词典
 
       词典中含有模版中需要的常量以及函数，词典文件以dic为后缀名，test.dic词典文件形如:
-        account_id=123|||456
-		target_id=123000123|||456000456
 		name=xiaoming|||hanmeimei|||lilei
 		reqUrl=http://www.abc.com/a/b/c|||http://www.def.com/d/e/f
 		tmp=$Func{intRand(1000000000, 1999999999)}
@@ -65,19 +63,14 @@
 
      模版文件以tpl后缀名，test.tpl模版文件形如：
      {
-		"basic":{
-			"device_id": $Func{intRand()},
+		"infos":{
+			"d_id": $Func{intRand()},
 			"version": $Var{tmp}=$Func{doubleRand(0,10,2)},
 			"os_type": "$Dic{ot}",
 			"os": "$Var{tmp}",
 			"test": "$Dic{b}"
-	    },
-		"requests":[
-			{
-				"req_url": "$Dic{reqUrl}"
-			}
-		]
-	  }
+         	}
+     }
 	  在模版文件中，在需要的地方放置变量（函数，词典，或者自定义），变量定义方式如第三点（术语）所述。在上面的模版中，version取值是$Func{doubleRand(0,10,2)}的值，然后将$Func{doubleRand(0,10,2)}的值赋给$Var{tmp}，在下面os处，以$Var{tmp}方式引用。这样，version和os的取值就一样了。
 	  
 （4） 调用Api执行
