@@ -1,0 +1,2 @@
+name=xiaoming|||hanmeimei|||lilei
+tmp=$Func{intRand(1000000000, 1999999999)}
