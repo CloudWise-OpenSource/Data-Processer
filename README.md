@@ -1,9 +1,12 @@
 # Data-Processer
 ## 简介 
 ##### 1、是什么？
-	他是一个模拟数据生成器。我们在测试过程中，产生完整、全面的真实数据可能比较困难。我们可以根据需求，创建对应的模版和词典，利用数据模拟生成器生成我们需要的模拟数据。
+	
+  他是一个模拟数据生成器。我们在测试过程中，产生完整、全面的真实数据可能比较困难。我们可以根据需求，创建对应的模版和词典，利用数据模拟生成器生成我们需要的模拟数据。
+
 ##### 2、能做什么？
-	他能够根据构建的模版和词典，生成我们需要的数据。
+	
+  他能够根据构建的模版和词典，生成我们需要的数据。
 	
 ##### 三个应用场景：
 
@@ -20,7 +23,9 @@
     在一个项目完成测试和迭代，发布到生产环境之后，通常也需要进行持续的功能或可用性监测，那么则需要有各种正常或异常数据按照某种规则和定义，持续稳定地生产并送回平台，此时将持续集成场景中的case，只需通过简单配置，则可以进行生产的验证，以满足这个需求。
 		
 ##### 3、架构
-    数据生成器包括：模版变量提取，模版变量执行，模版变量替换组成，三部分组成
+    
+  数据生成器包括：模版变量提取，模版变量执行，模版变量替换组成，三部分组成
+
 ##### 4、术语：
 	
    * 函数变量：模版和词典中以"$Func{"开头，以"}"结尾的字符串是一个函数变量。形如：$Func{intRand()}，其中，intRand()为内置函数。不支持函数嵌套
@@ -58,35 +63,35 @@
 
 （1） 编译：在simulatedata-generator目录下执行：
 
-	$ mvn clean package
+    $ mvn clean package
 	
    在target目录下可以看到生成了simulatedata-generator-0.0.1-SNAPSHOT.jar文件。
    应用中引入此文件作为依赖即可。
    
 （2） 编辑词典
 
-      词典中含有模版中需要的常量以及函数，词典文件以dic为后缀名，test.dic词典文件形如:
-		name=xiaoming|||hanmeimei|||lilei
-		reqUrl=http://www.abc.com/a/b/c|||http://www.def.com/d/e/f
-		tmp=$Func{intRand(1000000000, 1999999999)}
-		b=testVar
-		ot=$Func{intRand(2)}
-		等号前面是词典名，等号后面是词典值，值可以是字符串，也可以是函数变量，多个值用"|||"隔开。如果有多个值，取值时，会随机取其中一个值作为词典变量值。
-		注意：词典文件放置在应用跟目录下的dictionaries目录下。
+    词典中含有模版中需要的常量以及函数，词典文件以dic为后缀名，test.dic词典文件形如:
+        name=xiaoming|||hanmeimei|||lilei
+        reqUrl=http://www.abc.com/a/b/c|||http://www.def.com/d/e/f
+        tmp=$Func{intRand(1000000000, 1999999999)}
+        b=testVar
+        ot=$Func{intRand(2)}
+  等号前面是词典名，等号后面是词典值，值可以是字符串，也可以是函数变量，多个值用"|||"隔开。如果有多个值，取值时，会随机取其中一个值作为词典变量值。
+  `注意：词典文件放置在应用跟目录下的dictionaries目录下`。
 		
 （3） 编辑模版
 
-     模版文件以tpl后缀名，test.tpl模版文件形如：
+    模版文件以tpl后缀名，test.tpl模版文件形如：
      {
-		"infos":{
-			"d_id": $Func{intRand()},
-			"version": $Var{tmp}=$Func{doubleRand(0,10,2)},
-			"os_type": "$Dic{ot}",
-			"os": "$Var{tmp}",
-			"test": "$Dic{b}"
-         	}
+        "infos":{
+            "d_id": $Func{intRand()},
+            "version": $Var{tmp}=$Func{doubleRand(0,10,2)},
+            "os_type": "$Dic{ot}",
+            "os": "$Var{tmp}",
+            "test": "$Dic{b}"
+            }
      }
-	  在模版文件中，在需要的地方放置变量（函数，词典，或者自定义），变量定义方式如第三点（术语）所述。在上面的模版中，version取值是$Func{doubleRand(0,10,2)}的值，然后将$Func{doubleRand(0,10,2)}的值赋给$Var{tmp}，在下面os处，以$Var{tmp}方式引用。这样，version和os的取值就一样了。
+  在模版文件中，在需要的地方放置变量（函数，词典，或者自定义），变量定义方式如第三点（术语）所述。在上面的模版中，version取值是$Func{doubleRand(0,10,2)}的值，然后将$Func{doubleRand(0,10,2)}的值赋给$Var{tmp}，在下面os处，以$Var{tmp}方式引用。这样，version和os的取值就一样了。
 	  
 （4） 调用Api执行
 	    
