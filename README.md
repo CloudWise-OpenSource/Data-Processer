@@ -25,6 +25,7 @@
 ##### 3、架构
     
   数据生成器包括：模版变量提取，模版变量执行，模版变量替换组成，三部分组成
+  ![image](https://github.com/CloudWise-OpenSource/Data-Processer/raw/master/docs/930BC8C4-4051-485B-AB2F-C66E7373E9DC.png)
 
 ##### 4、术语：
 	
